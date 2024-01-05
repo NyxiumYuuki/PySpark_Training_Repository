@@ -1,34 +1,6 @@
 import os
 import findspark
 from pyspark.sql import SparkSession
-import pyspark.sql.functions as F
-
-spark = SparkSession.builder.master("local[*]").getOrCreate()
-
-
-sample_data = [
-    {"name": "John    D.", "age": 30},
-    {"name": "Alice   G.", "age": 25},
-    {"name": "Bob  T.", "age": 35},
-    {"name": "Eve   A.", "age": 28}
-]
-df = spark.createDataFrame(sample_data)
-
-
-
-
-
-transformed_df = remove_extra_spaces(df, "name")
-transformed_df.show()
-
-
-def main():
-    init_env()
-    print("hey there")
-
-
-if __name__ == "__main__":
-    main()
 
 
 def init_env():
@@ -37,3 +9,21 @@ def init_env():
     os.environ["HADOOP_HOME"] = "C:\\SPARK\\hadoop"
 
     findspark.init()
+
+
+def init_spark():
+    spark = SparkSession.builder.master("local[*]").getOrCreate()
+    df = spark.createDataFrame([
+        {'name': 'OUI OUI', 'age': 30},
+    ])
+    df.show()
+
+
+def main():
+    print("hey there")
+    init_env()
+    init_spark()
+
+
+if __name__ == "__main__":
+    main()
