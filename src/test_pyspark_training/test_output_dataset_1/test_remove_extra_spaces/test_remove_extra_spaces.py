@@ -19,7 +19,6 @@ def test_remove_extra_spaces(spark_session):
     ]
     input_df = spark_session.createDataFrame(input_data, input_schema)
 
-
     expected_schema = T.StructType(
         [
             T.StructField('name', T.StringType(), False),

@@ -3,6 +3,8 @@
 ## Installation
    - [Python 3.10](https://www.python.org/downloads/)
      - pyspark=3.1.1
+     - findspark
+     - pyspark-test
    - [Spark 3.1.1](https://spark.apache.org/downloads.html)
    - [Hadoop 3.3.6](https://hadoop.apache.org/releases.html)
    - [Java JDK 11](https://www.oracle.com/java/technologies/downloads/#java11)
