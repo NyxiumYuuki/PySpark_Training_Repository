@@ -1,6 +1,6 @@
 from pyspark.sql import types as T
 from src.test_pyspark_training.lib_test_utils import assert_df_equal
-from src.pyspark_training.output_dataset_1.clean_output_dataset_1 import remove_extra_spaces
+from src.pyspark_training.output_dataset_1.cleaning_output_dataset_1 import remove_extra_spaces
 
 
 def test_remove_extra_spaces(spark_session):

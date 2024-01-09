@@ -1,6 +1,6 @@
 from pyspark.sql import types as T
 from src.test_pyspark_training.lib_test_utils import assert_df_equal
-from src.pyspark_training.output_dataset_1.compute_output_dataset_1 import add_life_stage
+from src.pyspark_training.output_dataset_1.processing_output_dataset_1 import add_life_stage
 
 
 def test_add_life_stage(spark_session):
@@ -8,7 +8,7 @@ def test_add_life_stage(spark_session):
     input_schema = T.StructType(
         [
             T.StructField('name', T.StringType(), False),
-            T.StructField('age', T.IntegerType(), False),
+            T.StructField('age', T.IntegerType(), True),
         ]
     )
     input_data = [
@@ -18,14 +18,15 @@ def test_add_life_stage(spark_session):
         ('Bob T.', 35),
         ('John D.', 9),
         ('Eve A.', 12),
+        ('Eve B.', None),
     ]
     input_df = spark_session.createDataFrame(input_data, input_schema)
 
     expected_schema = T.StructType(
         [
             T.StructField('name', T.StringType(), False),
-            T.StructField('age', T.IntegerType(), False),
-            T.StructField('life_stage', T.StringType(), False),
+            T.StructField('age', T.IntegerType(), True),
+            T.StructField('life_stage', T.StringType(), True),
         ]
     )
     expected_data = [
@@ -35,6 +36,7 @@ def test_add_life_stage(spark_session):
         ('Bob T.', 35, 'adult'),
         ('John D.', 9, 'child'),
         ('Eve A.', 12, 'child'),
+        ('Eve B.', None, None),
     ]
     expected_df = spark_session.createDataFrame(expected_data, expected_schema)
 

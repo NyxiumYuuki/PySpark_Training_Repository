@@ -13,3 +13,8 @@
 ## Run Python Test
    - path from src/test_pyspark_training
    - `pytest -k test_`
+
+## Run pylint for code check
+     
+
+## Run Python doc with Sphinx

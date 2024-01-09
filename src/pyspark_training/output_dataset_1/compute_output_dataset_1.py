@@ -1,31 +1,30 @@
-import pyspark.sql.functions as F
-from pyspark.sql import DataFrame
-from src.pyspark_training.output_dataset_1.clean_output_dataset_1 import clean_output_dataset_1
+from pyspark.sql import SparkSession
+from pyspark.sql.types import StructType, StructField, IntegerType, StringType
+
+import src.pyspark_training.output_dataset_1.cleaning_output_dataset_1 as C
+import src.pyspark_training.output_dataset_1.processing_output_dataset_1 as P
+
+INPUT_DATASET_1_PATH = './assets/output_dataset_1/raw/RAW_input_output_dataset_1.csv'
+OUTPUT_DATASET_1_PATH = './assets/output_dataset_1/output/OUTPUT_output_dataset_1.csv'
 
 
-def compute_output_dataset_1(df: DataFrame) -> DataFrame:
-
-    df = clean_output_dataset_1(df)
-
-    df = add_life_stage(df)
-
-    return df
-
-
-def add_life_stage(df: DataFrame) -> DataFrame:
+def compute_output_dataset_1(spark_session: SparkSession):
     """
-    Add life stage
-        child if age < 13
-        teenager if age >= 13 and <= 19
-        adult for age>20
-    :param df:
+    Compute the output of output_dataset_1
+    :param spark_session:
     :return:
     """
-    df = df.withColumn(
-        'life_stage',
-        F.when(F.col('age') < 13, F.lit('child'))
-        .when(F.col('age').between(13, 19), F.lit('teenager'))
-        .otherwise(F.lit('adult'))
-    )
+    df_schema = StructType([
+        StructField('name', StringType(), False),
+        StructField('age', IntegerType(), False)
+    ])
+    df = spark_session.read.csv(INPUT_DATASET_1_PATH, header=True, schema=df_schema)
 
-    return df
+    # Cleaning
+    cleaned_df = C.remove_extra_spaces(df, 'name')
+
+    # Processing
+    df = P.add_life_stage(cleaned_df)
+
+    df.show()
+    df.write.mode('overwrite').csv(OUTPUT_DATASET_1_PATH)

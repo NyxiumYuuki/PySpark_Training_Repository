@@ -1,6 +1,7 @@
 import os
 import findspark
 from pyspark.sql import SparkSession
+from src.pyspark_training.output_dataset_1.compute_output_dataset_1 import compute_output_dataset_1
 
 
 def init_env():
@@ -12,17 +13,15 @@ def init_env():
 
 
 def init_spark():
-    spark = SparkSession.builder.master("local[*]").getOrCreate()
-    df = spark.createDataFrame([
-        {'name': 'OUI OUI', 'age': 30},
-    ])
-    df.show()
+    return SparkSession.builder.master("local[*]").getOrCreate()
 
 
 def main():
     print("hey there")
     init_env()
-    init_spark()
+    spark_session = init_spark()
+
+    compute_output_dataset_1(spark_session)
 
 
 if __name__ == "__main__":
