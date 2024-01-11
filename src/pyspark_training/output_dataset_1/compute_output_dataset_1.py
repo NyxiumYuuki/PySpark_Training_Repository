@@ -1,11 +1,14 @@
+"""
+    This module is used to compute the dataset output_dataset_1.
+"""
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, IntegerType, StringType
-
 import src.pyspark_training.output_dataset_1.cleaning_output_dataset_1 as C
 import src.pyspark_training.output_dataset_1.processing_output_dataset_1 as P
 
+
 INPUT_DATASET_1_PATH = './assets/output_dataset_1/raw/RAW_input_output_dataset_1.csv'
-OUTPUT_DATASET_1_PATH = './assets/output_dataset_1/output/OUTPUT_output_dataset_1.csv'
+OUTPUT_DATASET_1_PATH = '.\\assets\\output_dataset_1\\output\\OUTPUT_output_dataset_1.csv'
 
 
 def compute_output_dataset_1(spark_session: SparkSession):
@@ -27,4 +30,4 @@ def compute_output_dataset_1(spark_session: SparkSession):
     df = P.add_life_stage(cleaned_df)
 
     df.show()
-    df.write.mode('overwrite').csv(OUTPUT_DATASET_1_PATH)
+    df.coalesce(1).write.mode('overwrite').save(OUTPUT_DATASET_1_PATH, format='csv')

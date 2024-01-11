@@ -1,0 +1,6 @@
+pyspark
+pyspark-test
+python-dotenv
+pytest
+pylint
+sphinx

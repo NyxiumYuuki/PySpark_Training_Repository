@@ -16,7 +16,7 @@ def spark_session(request):
     os.environ['PYSPARK_PYTHON'] = sys.executable
     os.environ['PYSPARK_DRIVER_PYTHON'] = sys.executable
     os.environ["JAVA_HOME"] = "C:\\Program Files\\Java\\jdk-11"
-    os.environ["SPARK_HOME"] = "C:\\SPARK\\spark-3.1.1-bin-hadoop3.2"
+    os.environ["SPARK_HOME"] = "C:\\SPARK\\spark-3.1.1-bin-hadoop3.2\\bin"
     os.environ["HADOOP_HOME"] = "C:\\SPARK\\hadoop"
 
     findspark.init()

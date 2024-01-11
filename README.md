@@ -1,20 +1,31 @@
-# Python PySpark Training Repository
+Python PySpark Training Repository
+==============
+**Author:** *Yûki VACHOT*
 
-## Installation
-   - [Python 3.10](https://www.python.org/downloads/)
-     - pyspark=3.1.1
-     - findspark
-     - pyspark-test
-   - [Spark 3.1.1](https://spark.apache.org/downloads.html)
-   - [Hadoop 3.3.6](https://hadoop.apache.org/releases.html)
-   - [Java JDK 11](https://www.oracle.com/java/technologies/downloads/#java11)
-   - (not mandatory) [Anaconda for conda](https://www.anaconda.com/download/) 
+**Updated:** **10/01/24**
+# CONTENT TABLE
 
-## Run Python Test
-   - path from src/test_pyspark_training
-   - `pytest -k test_`
 
-## Run pylint for code check
-     
+---
+# Installation
 
-## Run Python doc with Sphinx
+`python -m venv `
+
+- [Python 3.11.7](https://www.python.org/downloads/)
+- [Spark 3.5.0 with Hadoop 3.0.0](https://spark.apache.org/downloads.html)
+- [winutils.exe, .pdb and hadoop.dll](https://github.com/steveloughran/winutils/tree/master/hadoop-3.0.0/bin)
+- [Java JDK 17](https://www.azul.com/downloads/?version=java-17-lts&package=jdk#zulu)
+---
+# Run Python PySpark
+- `python init.py`
+---
+# Run Python Test
+- path from src/test_pyspark_training
+- `pytest -k test_`
+---
+# Run pylint for code check
+
+---
+# Run Python doc with Sphinx
+
+---
