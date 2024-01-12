@@ -1,6 +1,5 @@
 import pyspark.sql.functions as F
 from pyspark.sql import DataFrame
-from pyspark.sql.types import IntegerType
 
 
 def remove_extra_spaces(df: DataFrame, column_name: str) -> DataFrame:

@@ -4,3 +4,5 @@ python-dotenv
 pytest
 pylint
 sphinx
+sphinx-rtd-theme
+pygraphviz
