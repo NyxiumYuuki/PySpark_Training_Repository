@@ -1,5 +1,7 @@
 import json
 import inspect
+import stack_data
+import uuid
 
 
 def get_node_type_from_func(func: object) -> str:
@@ -34,13 +36,9 @@ class PipeGraph(object):
     def __call__(self, *args, **kwargs):
         print(self.__name)
         print(self.__func.__doc__)
-        test = inspect.stack()
-        print(get_stack_frame_id(test[1][0].stack[0]))
+        print("-----------")
         print(self.add_node(
             doc=self.__func.__doc__,
-        ))
-        print(self.add_link(
-            get_stack_frame_id()
         ))
 
         return self.__func(*args, **kwargs)
@@ -52,7 +50,9 @@ class PipeGraph(object):
     def add_node(self, **kwargs):
         node_type = get_node_type_from_func(self.__func)
         current_id = PipeGraph.__node_id
-        node = {'id': current_id, 'name': self.__name, 'type': node_type}
+        frame = inspect.currentframe().f_back.f_back
+        current_co_name = stack_data.FrameInfo(frame).code.co_name
+        node = {'id': current_id, 'uuid': str(uuid.uuid4()), 'name': self.__name, 'type': node_type, 'before': current_co_name}
         for k, v in kwargs.items():
             node[k] = v
         PipeGraph.__json['nodes'].append(node)
